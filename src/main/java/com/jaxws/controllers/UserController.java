@@ -31,12 +31,6 @@ public class UserController {
     }
 
 
-    @WebMethod(operationName = "CREATE_USER", action = "CREATE_USER")
-    public Response createUser(UserDto user) throws SQLException {
-        return userService.createUser(user);
-    }
-
-
     @WebMethod(operationName = "UPDATE_USER", action = "UPDATE_USER")
     public Response updateUser(UserDto user, @WebParam(name = "ID") int id) throws SQLException {
         return userService.updateUser(user, id);

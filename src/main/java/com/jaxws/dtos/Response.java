@@ -9,6 +9,7 @@ import java.util.List;
 @XmlRootElement(name = "RESPONSE")
 public class Response {
     private String message;
+    private String token;
     private int status;
     private List<User> users;
 
@@ -57,7 +58,17 @@ public class Response {
         return success;
     }
 
+
     public void setSuccess(boolean success) {
         this.success = success;
+    }
+
+    @XmlElement(name = "TOKEN")
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

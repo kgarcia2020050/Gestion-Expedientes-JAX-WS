@@ -1,0 +1,8 @@
+<jaxb:bindings xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+               xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+               jaxb:version="2.1">
+
+    <!-- Bind todas las clases generadas para que tengan @XmlRootElement -->
+    <jaxb:globalBindings generateElementProperty="true"/>
+
+</jaxb:bindings>
