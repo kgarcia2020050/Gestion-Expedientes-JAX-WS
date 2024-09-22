@@ -16,7 +16,7 @@ import java.sql.SQLException;
 public class AuthController {
 
 
-    private AuthService authService;
+    private final AuthService authService;
 
     public AuthController() {
         this.authService = new AuthService();
@@ -26,16 +26,6 @@ public class AuthController {
     @WebMethod(operationName = "LOGIN", action = "LOGIN")
     public Response login(@WebParam(name = "EMAIL") String email, @WebParam(name = "PASSWORD") String password) {
         return authService.loginUser(email, password);
-    }
-
-
-    @WebMethod(operationName = "REGISTER", action = "REGISTER")
-    public Response register(UserDto user) {
-        try {
-            return authService.createUser(user);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
     }
 
 

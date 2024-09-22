@@ -12,9 +12,6 @@ public class UserDto implements Serializable {
     private String password;
     private String firstName;
     private String lastName;
-    private Integer createdBy;
-    private Integer updatedBy;
-    private boolean active;
 
 
     @XmlElement(name = "EMAIL")
@@ -55,37 +52,5 @@ public class UserDto implements Serializable {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-
-    @XmlElement(name = "CREATED_BY")
-
-    public Integer getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(Integer createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    @XmlElement(name = "UPDATED_BY")
-
-    public Integer getUpdatedBy() {
-        return updatedBy;
-    }
-
-    public void setUpdatedBy(Integer updatedBy) {
-        this.updatedBy = updatedBy;
-    }
-
-
-    @XmlElement(name = "IS_ACTIVE")
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
     }
 }
