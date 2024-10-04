@@ -29,4 +29,10 @@ public class AuthController {
     }
 
 
+    @WebMethod(operationName = "REGISTER", action = "REGISTER")
+    public Response register(UserDto userDto) {
+        return authService.registerUser(userDto);
+    }
+
+
 }

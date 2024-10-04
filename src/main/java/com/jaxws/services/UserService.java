@@ -61,7 +61,6 @@ public class UserService {
                 User user = new User();
                 user.setId(resultSet.getInt("id"));
                 user.setEmail(resultSet.getString("email"));
-                user.setPassword(resultSet.getString("password"));
                 user.setFirstName(resultSet.getString("first_name"));
                 user.setLastName(resultSet.getString("last_name"));
                 user.setLastLogin(resultSet.getDate("last_login"));
@@ -84,7 +83,7 @@ public class UserService {
             dbConnection.disconnect();
             disconnect();
         }
-        response.setUsers(users);
+        response.setData(users);
         return response;
     }
 
@@ -170,6 +169,41 @@ public class UserService {
         } catch (SQLException ex) {
             ex.printStackTrace();
             response.setMessage("Error al modificar al usuario: " + ex.getMessage());
+            response.setStatus(500);
+            response.setSuccess(false);
+        } finally {
+            dbConnection.disconnect();
+            disconnect();
+        }
+
+        return response;
+    }
+
+
+    public Response deleteUser(int id) throws SQLException {
+        Response response = new Response();
+        DbConnection dbConnection = new DbConnection();
+        try {
+
+            connection = dbConnection.connect();
+
+            String sql = "UPDATE [user] SET active = ? WHERE id = ?";
+            preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setBoolean(1, false);
+            preparedStatement.setInt(2, id);
+
+            int rowsInserted = preparedStatement.executeUpdate();
+
+            if (rowsInserted > 0) {
+                response.setMessage("Usuario eliminado correctamente.");
+                response.setStatus(200);
+                response.setSuccess(true);
+
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            response.setMessage("Error al eliminar al usuario: " + ex.getMessage());
             response.setStatus(500);
             response.setSuccess(false);
         } finally {

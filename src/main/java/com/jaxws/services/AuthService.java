@@ -62,8 +62,7 @@ public class AuthService {
     }
 
 
-
-    public Response loginUser(String email, String password)  {
+    public Response loginUser(String email, String password) {
         Response response = new Response();
         DbConnection dbConnection = new DbConnection();
         try {
@@ -72,7 +71,6 @@ public class AuthService {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, email);
             resultSet = preparedStatement.executeQuery();
-
 
 
             if (resultSet.next()) {
@@ -106,6 +104,47 @@ public class AuthService {
             dbConnection.disconnect();
             disconnect();
         }
+        return response;
+    }
+
+    public Response registerUser(UserDto userDto) {
+        Response response = new Response();
+        DbConnection dbConnection = new DbConnection();
+        User myUser = new User(userDto.getEmail(), userDto.getFirstName(), userDto.getPassword(), userDto.getLastName(), true);
+        try {
+
+            myUser.setPassword(hashUtil.hashPassword(myUser.getPassword()));
+            connection = dbConnection.connect();
+
+            String sql = "INSERT INTO [user] (email, first_name, password, last_name," +
+                    "active) VALUES (?, ?, ?,?,?)";
+            preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setString(1, myUser.getEmail());
+            preparedStatement.setString(2, myUser.getFirstName());
+            preparedStatement.setString(3, myUser.getPassword());
+            preparedStatement.setString(4, myUser.getLastName());
+            preparedStatement.setBoolean(5, myUser.isActive());
+
+            int rowsInserted = preparedStatement.executeUpdate();
+
+            if (rowsInserted > 0) {
+                response.setMessage("Usuario registrado correctamente.");
+                response.setStatus(200);
+                response.setSuccess(true);
+
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            response.setMessage("Error al registrar al usuario: " + ex.getMessage());
+            response.setStatus(500);
+            response.setSuccess(false);
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        } finally {
+            disconnect();
+        }
+
         return response;
     }
 

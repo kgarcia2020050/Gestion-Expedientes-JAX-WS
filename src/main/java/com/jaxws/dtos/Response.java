@@ -11,7 +11,7 @@ public class Response {
     private String message;
     private String token;
     private int status;
-    private List<User> users;
+    private List<?> data;
 
     private List<String> errors;
 
@@ -35,13 +35,13 @@ public class Response {
         this.status = status;
     }
 
-    @XmlElement(name = "USERS")
-    public List<User> getUsers() {
-        return users;
+    @XmlElement(name = "DATA")
+    public List<?> getData() {
+        return data;
     }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public void setData(List<?> data) {
+        this.data = data;
     }
 
     @XmlElement(name = "ERRORS")

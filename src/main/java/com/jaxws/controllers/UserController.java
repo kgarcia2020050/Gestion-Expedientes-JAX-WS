@@ -9,6 +9,7 @@ import jakarta.jws.WebParam;
 import jakarta.jws.WebService;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
+
 import java.sql.SQLException;
 
 @WebService(name = "UserController", serviceName = "UserController")
@@ -44,6 +45,12 @@ public class UserController {
     @WebMethod(operationName = "UPDATE_USER", action = "UPDATE_USER")
     public Response updateUser(UserDto user, @WebParam(name = "ID") int id) throws SQLException {
         return userService.updateUser(user, id);
+    }
+
+
+    @WebMethod(operationName = "DELETE_USER", action = "DELETE_USER")
+    public Response deleteUser(@WebParam(name = "ID") int id) throws SQLException {
+        return userService.deleteUser(id);
     }
 
 

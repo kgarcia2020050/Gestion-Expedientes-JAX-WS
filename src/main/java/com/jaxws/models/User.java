@@ -50,9 +50,19 @@ public class User implements Serializable {
     }
 
 
-    public User() {
-
+    public User(String email, String firstName, String password, String lastName, boolean active) {
+        this.email = email;
+        this.firstName = firstName;
+        this.password = password;
+        this.lastName = lastName;
+        this.active = active;
+        this.updatedAt = new Date(getDate());
     }
+
+
+
+    public User(){}
+
 
     @XmlElement(name = "ID")
     public int getId() {

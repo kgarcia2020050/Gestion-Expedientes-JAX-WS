@@ -2,7 +2,7 @@
 <handler-chains xmlns="http://java.sun.com/xml/ns/javaee">
     <handler-chain>
         <handler>
-            <handler-name>xd</handler-name>
+            <handler-name>AuthMiddleware</handler-name>
             <handler-class>com.jaxws.utils.Handler</handler-class>
         </handler>
     </handler-chain>
