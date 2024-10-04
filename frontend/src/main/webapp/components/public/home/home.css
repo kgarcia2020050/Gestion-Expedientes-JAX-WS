@@ -18,12 +18,12 @@ body {
 .hero h1 {
     font-size: 3rem;
     font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 3rem;
 }
 
 .hero p {
     font-size: 1.2rem;
-    margin-bottom: 30px;
+    margin-bottom: 2rem;
 }
 
 .btn-custom {
@@ -43,18 +43,23 @@ body {
 
 /* Estilo para la sección de características */
 .features {
-    padding: 60px 20px;
+    padding: 15vh 20px;
 }
 
 .features h2 {
     font-size: 2.5rem;
     text-align: center;
-    margin-bottom: 50px;
+    margin-bottom: 100px;
 }
 
 .feature-box {
     text-align: center;
     margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
 .feature-box .icon {

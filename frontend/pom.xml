@@ -55,6 +55,12 @@
             <artifactId>junit-jupiter-engine</artifactId>
             <version>${junit.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>font-awesome</artifactId>
+            <version>6.5.2</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -79,7 +85,7 @@
                 <configuration>
                     <packageName>com.frontend.frontend.wsdl</packageName>
                     <wsdlUrls>
-                        <wsdlUrl>http://DESKTOP-5QHEAJA:8080/jaxws-1.0-SNAPSHOT/AuthController?wsdl</wsdlUrl>
+                        <wsdlUrl>http://desktop-upbmb70:8080/jaxws-1.0-SNAPSHOT/AuthController?wsdl</wsdlUrl>
                     </wsdlUrls>
                     <extension>true</extension>
                 </configuration>
