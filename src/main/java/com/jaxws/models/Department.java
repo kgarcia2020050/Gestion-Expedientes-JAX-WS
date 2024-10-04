@@ -1,25 +1,24 @@
 package com.jaxws.models;
 
+
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
 import java.io.Serializable;
 import java.sql.Date;
 
-@XmlRootElement(name = "COMPANY")
-public class Company implements Serializable {
+@XmlRootElement(name = "DEPARTMENT")
+public class Department implements Serializable {
 
     private int id;
+    private int companyId;
     private String name;
-    private String address;
-    private String phone;
-    private String email;
-    private String idIdentification;
-    private String economicActivity;
+    private String description;
     private Integer createdBy;
     private Integer updatedBy;
     private Date createdAt;
     private Date updatedAt;
+
 
     public long getDate() {
         java.util.Date actualDate = new Date(System.currentTimeMillis());
@@ -27,21 +26,20 @@ public class Company implements Serializable {
     }
 
 
-    public Company(String name, String address, String phone, String email, String idIdentification, String economicActivity) {
+    public Department() {
+
+    }
+
+    public Department(int companyId, String name, String description) {
+
+        this.companyId = companyId;
         this.name = name;
-        this.address = address;
-        this.phone = phone;
-        this.email = email;
-        this.idIdentification = idIdentification;
-        this.economicActivity = economicActivity;
+        this.description = description;
         this.createdAt = new Date(getDate());
         this.updatedAt = new Date(getDate());
 
     }
 
-    public Company() {
-
-    }
 
     @XmlElement(name = "ID")
     public int getId() {
@@ -52,6 +50,14 @@ public class Company implements Serializable {
         this.id = id;
     }
 
+    @XmlElement(name = "COMPANY_ID")
+    public int getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(int companyId) {
+        this.companyId = companyId;
+    }
 
     @XmlElement(name = "NAME")
     public String getName() {
@@ -62,49 +68,13 @@ public class Company implements Serializable {
         this.name = name;
     }
 
-    @XmlElement(name = "ADDRESS")
-    public String getAddress() {
-        return address;
+    @XmlElement(name = "DESCRIPTION")
+    public String getDescription() {
+        return description;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    @XmlElement(name = "PHONE")
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    @XmlElement(name = "EMAIL")
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    @XmlElement(name = "ID_IDENTIFICATION")
-    public String getIdIdentification() {
-        return idIdentification;
-    }
-
-    public void setIdIdentification(String idIdentification) {
-        this.idIdentification = idIdentification;
-    }
-
-    @XmlElement(name = "ECONOMIC_ACTIVITY")
-    public String getEconomicActivity() {
-        return economicActivity;
-    }
-
-    public void setEconomicActivity(String economicActivity) {
-        this.economicActivity = economicActivity;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @XmlElement(name = "CREATED_BY")
