@@ -12,6 +12,7 @@ public class UserDto implements Serializable {
     private String password;
     private String firstName;
     private String lastName;
+    private String role;
 
 
     @XmlElement(name = "EMAIL")
@@ -53,4 +54,12 @@ public class UserDto implements Serializable {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+    @XmlElement(name = "ROLE")
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) { this.role = role; }
 }

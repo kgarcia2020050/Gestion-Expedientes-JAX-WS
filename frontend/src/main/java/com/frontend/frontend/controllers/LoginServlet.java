@@ -21,11 +21,21 @@ public class LoginServlet extends HttpServlet {
 
         AuthController_Service service = new AuthController_Service();
         AuthController port = service.getAuthControllerPort();
-
         Response loginSuccessful = port.login(email, password);
 
         if (loginSuccessful.isSUCCESS()) {
-            response.sendRedirect(request.getContextPath() + "/views/main/index.jsp");
+            String role = loginSuccessful.getROLE();
+            String token = loginSuccessful.getTOKEN();
+            request.getSession().setAttribute("role", role);
+            request.getSession().setAttribute("token", token);
+
+            if ("ADMIN".equals(role)) {
+                response.sendRedirect(request.getContextPath() + "/components/private/admin/home/home.jsp");
+            } else if ("EMPLOYEE".equals(role)) {
+                response.sendRedirect(request.getContextPath() + "/components/private/employee/home/home.jsp");
+            } else {
+                response.sendRedirect(request.getContextPath() + "/views/error-page/notFound.jsp");
+            }
         } else {
             response.sendRedirect(request.getContextPath() + "/views/error-page/notFound.jsp");
         }

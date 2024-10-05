@@ -32,42 +32,30 @@ public class CompanyService {
     }
 
     public void disconnect() {
-        if (resultSet != null) {
-            try {
+        try {
+            if (resultSet != null) {
                 resultSet.close();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
 
-        }
-        if (statement != null) {
-            try {
+            }
+            if (statement != null) {
                 statement.close();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
+
             }
 
-        }
-
-        if (preparedStatement != null) {
-            try {
+            if (preparedStatement != null) {
                 preparedStatement.close();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
             }
-        }
 
-        if (connection != null) {
-            try {
+            if (connection != null) {
                 connection.close();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
+
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
-
-    public Response getCompanies() throws SQLException {
+    public Response getCompanies()  {
         List<Company> companies = new ArrayList<>();
         DbConnection dbConnection = new DbConnection();
 
@@ -86,12 +74,12 @@ public class CompanyService {
                 company.setAddress(resultSet.getString("address"));
                 company.setPhone(resultSet.getString("phone"));
                 company.setEmail(resultSet.getString("email"));
-                company.setIdIdentification(resultSet.getString("idIdentification"));
-                company.setEconomicActivity(resultSet.getString("economicActivity"));
-                company.setCreatedBy(resultSet.getInt("createdBy"));
-                company.setUpdatedBy(resultSet.getInt("updatedBy"));
-                company.setCreatedAt(resultSet.getDate("createdAt"));
-                company.setUpdatedAt(resultSet.getDate("updatedAt"));
+                company.setIdIdentification(resultSet.getString("id_identification"));
+                company.setEconomicActivity(resultSet.getString("economic_activity"));
+                company.setCreatedBy(resultSet.getInt("created_by"));
+                company.setUpdatedBy(resultSet.getInt("updated_by"));
+                company.setCreatedAt(resultSet.getDate("created_at"));
+                company.setUpdatedAt(resultSet.getDate("updated_at"));
 
                 companies.add(company);
             }
@@ -112,7 +100,7 @@ public class CompanyService {
     }
 
 
-    public Response createCompany(CompanyDto companyDto) throws SQLException {
+    public Response createCompany(CompanyDto companyDto)  {
         Response response = new Response();
         DbConnection dbConnection = new DbConnection();
         Company company = new Company(companyDto.getName(), companyDto.getAddress(), companyDto.getPhone(),
@@ -154,7 +142,7 @@ public class CompanyService {
     }
 
 
-    public Response updateCompany(CompanyDto companyDto, int id) throws SQLException {
+    public Response updateCompany(CompanyDto companyDto, int id)  {
         Response response = new Response();
         DbConnection dbConnection = new DbConnection();
         Company company = new Company(companyDto.getName(), companyDto.getAddress(), companyDto.getPhone(),
@@ -198,7 +186,7 @@ public class CompanyService {
     }
 
 
-    public Response deleteCompany(int id) throws SQLException {
+    public Response deleteCompany(int id)  {
         Response response = new Response();
         DbConnection dbConnection = new DbConnection();
         try {

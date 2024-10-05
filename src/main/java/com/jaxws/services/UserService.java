@@ -30,22 +30,32 @@ public class UserService {
         this.handler = new Handler();
     }
 
-    public void disconnect() throws SQLException {
-        if (resultSet != null) {
-            resultSet.close();
+    public void disconnect() {
+        try {
+            if (resultSet != null) {
+                resultSet.close();
 
-        }
-        if (statement != null) {
-            statement.close();
+            }
+            if (statement != null) {
+                statement.close();
 
-        }
+            }
 
-        if (preparedStatement != null) {
-            preparedStatement.close();
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+
+            if (connection != null) {
+                connection.close();
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
-    public Response getUsers() throws SQLException {
+
+    public Response getUsers()  {
         List<User> users = new ArrayList<>();
         DbConnection dbConnection = new DbConnection();
 
@@ -88,10 +98,10 @@ public class UserService {
     }
 
 
-    public Response createUser(UserDto user) throws SQLException {
+    public Response createUser(UserDto user)  {
         Response response = new Response();
         DbConnection dbConnection = new DbConnection();
-        User myUser = new User(user.getEmail(), user.getFirstName(), user.getPassword(), user.getLastName(), handler.getUserId(), handler.getUserId(), true);
+        User myUser = new User(user.getEmail(), user.getFirstName(), user.getPassword(), user.getLastName(), handler.getUserId(), handler.getUserId(), true, user.getRole());
         try {
 
             myUser.setPassword(hashUtil.hashPassword(myUser.getPassword()));
@@ -135,10 +145,10 @@ public class UserService {
         return response;
     }
 
-    public Response updateUser(UserDto user, int id) throws SQLException {
+    public Response updateUser(UserDto user, int id)  {
         Response response = new Response();
         DbConnection dbConnection = new DbConnection();
-        User myUser = new User(user.getEmail(), user.getFirstName(), user.getPassword(), user.getLastName(), handler.getUserId(), true);
+        User myUser = new User(user.getEmail(), user.getFirstName(), user.getPassword(), user.getLastName(), handler.getUserId(), true, user.getRole());
         myUser.setId(id);
         try {
 
@@ -180,7 +190,7 @@ public class UserService {
     }
 
 
-    public Response deleteUser(int id) throws SQLException {
+    public Response deleteUser(int id)  {
         Response response = new Response();
         DbConnection dbConnection = new DbConnection();
         try {

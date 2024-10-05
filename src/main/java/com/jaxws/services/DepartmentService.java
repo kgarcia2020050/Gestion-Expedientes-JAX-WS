@@ -30,42 +30,31 @@ public class DepartmentService {
     }
 
     public void disconnect() {
-        if (resultSet != null) {
-            try {
+        try {
+            if (resultSet != null) {
                 resultSet.close();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
 
-        }
-        if (statement != null) {
-            try {
+            }
+            if (statement != null) {
                 statement.close();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
+
             }
 
-        }
-
-        if (preparedStatement != null) {
-            try {
+            if (preparedStatement != null) {
                 preparedStatement.close();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
             }
-        }
 
-        if (connection != null) {
-            try {
+            if (connection != null) {
                 connection.close();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
+
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
 
-    public Response getDepartments() throws SQLException {
+    public Response getDepartments() {
         List<Department> departments = new ArrayList<>();
         DbConnection dbConnection = new DbConnection();
 
@@ -80,12 +69,12 @@ public class DepartmentService {
             while (resultSet.next()) {
                 Department department = new Department();
                 department.setId(resultSet.getInt("id"));
-                department.setCompanyId(resultSet.getInt("companyId"));
+                department.setCompanyId(resultSet.getInt("company_id"));
                 department.setDescription(resultSet.getString("description"));
-                department.setCreatedBy(resultSet.getInt("createdBy"));
-                department.setUpdatedBy(resultSet.getInt("updatedBy"));
-                department.setCreatedAt(resultSet.getDate("createdAt"));
-                department.setUpdatedBy(resultSet.getInt("updatedBy"));
+                department.setCreatedBy(resultSet.getInt("created_by"));
+                department.setUpdatedBy(resultSet.getInt("updated_by"));
+                department.setCreatedAt(resultSet.getDate("created_at"));
+                department.setUpdatedBy(resultSet.getInt("updated_at"));
 
                 departments.add(department);
             }
@@ -106,7 +95,7 @@ public class DepartmentService {
     }
 
 
-    public Response createDepartment(DepartmentDto departmentDto) throws SQLException {
+    public Response createDepartment(DepartmentDto departmentDto)  {
         Response response = new Response();
         DbConnection dbConnection = new DbConnection();
         Department department = new Department(departmentDto.getCompanyId(), departmentDto.getName(), departmentDto.getDescription());
@@ -144,7 +133,7 @@ public class DepartmentService {
     }
 
 
-    public Response updateDepartment(DepartmentDto departmentDto, int id) throws SQLException {
+    public Response updateDepartment(DepartmentDto departmentDto, int id) {
         Response response = new Response();
         DbConnection dbConnection = new DbConnection();
         Department department = new Department(departmentDto.getCompanyId(), departmentDto.getName(), departmentDto.getDescription());
@@ -182,7 +171,7 @@ public class DepartmentService {
         return response;
     }
 
-    public Response deleteDepartment(int id) throws SQLException {
+    public Response deleteDepartment(int id) {
         Response response = new Response();
         DbConnection dbConnection = new DbConnection();
         try {

@@ -13,7 +13,7 @@
     <h1>Gestión Eficiente de Expedientes</h1>
     <p>Administra, organiza y rastrea tus expedientes desde una sola plataforma.</p>
     <a href="${pageContext.request.contextPath}/components/public/auth/login.jsp" class="btn btn-custom">Iniciar Sesión</a>
-    <a href="register.jsp" class="btn btn-custom">Registrarse</a>
+    <a href="${pageContext.request.contextPath}/components/public/auth/register.jsp" class="btn btn-custom">Registrarse</a>
 </div>
 
 <div class="features container">

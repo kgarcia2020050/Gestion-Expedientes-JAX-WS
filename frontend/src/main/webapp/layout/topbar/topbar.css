@@ -1,0 +1,21 @@
+.topbar {
+    background-color: #333;
+    color: white;
+    height: 5vh;
+    padding: 2vh;
+    position: fixed;
+    top: 0;
+    left: 18vw;
+    width: calc(100% - 20vw);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.topbar h1 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: normal;
+}

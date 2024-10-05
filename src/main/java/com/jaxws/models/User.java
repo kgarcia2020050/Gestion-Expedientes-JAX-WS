@@ -13,6 +13,8 @@ public class User implements Serializable {
     private String password;
     private String firstName;
     private String lastName;
+
+    private String role;
     private Date lastLogin;
     private Integer createdBy;
     private Integer updatedBy;
@@ -25,7 +27,7 @@ public class User implements Serializable {
         return actualDate.getTime();
     }
 
-    public User(String email, String firstName, String password, String lastName, int createdBy, int updatedBy, boolean active) {
+    public User(String email, String firstName, String password, String lastName, int createdBy, int updatedBy, boolean active, String role) {
         this.email = email;
         this.firstName = firstName;
         this.password = password;
@@ -33,24 +35,26 @@ public class User implements Serializable {
         this.createdBy = createdBy;
         this.updatedBy = updatedBy;
         this.active = active;
+        this.role = role;
         this.lastLogin = new Date(getDate());
         this.createdAt = new Date(getDate());
         this.updatedAt = new Date(getDate());
     }
 
 
-    public User(String email, String firstName, String password, String lastName, int updatedBy, boolean active) {
+    public User(String email, String firstName, String password, String lastName, int updatedBy, boolean active, String role) {
         this.email = email;
         this.firstName = firstName;
         this.password = password;
         this.lastName = lastName;
         this.updatedBy = updatedBy;
         this.active = active;
+        this.role = role;
         this.updatedAt = new Date(getDate());
     }
 
 
-    public User(String email, String firstName, String password, String lastName, boolean active) {
+    public User(String email, String firstName, String password, String lastName, boolean active, String role) {
         this.email = email;
         this.firstName = firstName;
         this.password = password;

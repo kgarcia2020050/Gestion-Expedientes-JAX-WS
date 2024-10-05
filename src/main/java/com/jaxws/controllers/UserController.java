@@ -26,31 +26,29 @@ public class UserController {
 
     @WebMethod(operationName = "GET_USERS", action = "GET_USERS")
     @XmlElement(name = "USER")
-    public Response getAllUsers() throws SQLException {
+    public Response getAllUsers()  {
         return userService.getUsers();
+
     }
 
 
     @WebMethod(operationName = "CREATE_USER", action = "CREATE_USER")
     public Response register(UserDto user) {
-        try {
-
-            return userService.createUser(user);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        return userService.createUser(user);
     }
 
 
     @WebMethod(operationName = "UPDATE_USER", action = "UPDATE_USER")
-    public Response updateUser(UserDto user, @WebParam(name = "ID") int id) throws SQLException {
+    public Response updateUser(UserDto user, @WebParam(name = "ID") int id) {
         return userService.updateUser(user, id);
+
     }
 
 
     @WebMethod(operationName = "DELETE_USER", action = "DELETE_USER")
-    public Response deleteUser(@WebParam(name = "ID") int id) throws SQLException {
+    public Response deleteUser(@WebParam(name = "ID") int id) {
         return userService.deleteUser(id);
+
     }
 
 
