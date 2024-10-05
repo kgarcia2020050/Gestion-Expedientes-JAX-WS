@@ -91,3 +91,10 @@ body {
     background: rgba(255, 255, 255, 0.2);
     border-radius: 50%;
 }
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center;
+}

@@ -9,7 +9,7 @@ public class DbConnection {
 
     public DbConnection() {
         this.user = "sa";
-        this.password = "123456";
+        this.password = "Car64669!";
         this.url = "jdbc:sqlserver://localhost:1433;databaseName=case_management_system;encrypt=false;trustServerCertificate=true";
         this.driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
         this.connection = null;

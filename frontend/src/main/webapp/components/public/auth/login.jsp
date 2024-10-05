@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>Iniciar Sesión</title>
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/components/public/auth/login.css">
 </head>
 
 <body>
@@ -11,6 +11,11 @@
 <div class="login-container">
     <div class="background-shape"></div>
     <h3>Iniciar Sesión</h3>
+
+    <c:if test="${not empty errorMessage}">
+        <div class="error-message">${errorMessage}</div>
+    </c:if>
+
     <form id="loginForm" action="${pageContext.request.contextPath}/login" method="post">
         <div class="icon-input">
             <i class="fa-solid fa-envelope"></i>

@@ -93,7 +93,7 @@ public class UserService {
             dbConnection.disconnect();
             disconnect();
         }
-        response.setData(users);
+        response.setUsers(users);
         return response;
     }
 
