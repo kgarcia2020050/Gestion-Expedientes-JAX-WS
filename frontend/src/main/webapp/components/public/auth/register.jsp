@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>Registro</title>
-    <link rel="stylesheet" href="register.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/components/public/auth/register.css">
 </head>
 
 <body>

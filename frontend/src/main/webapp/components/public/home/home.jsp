@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Expedientes</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="home.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/components/public/home/home.css" rel="stylesheet">
 </head>
 <body>
 
