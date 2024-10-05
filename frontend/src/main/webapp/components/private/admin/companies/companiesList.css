@@ -1,0 +1,42 @@
+.container {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.companies-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.companies-table th, .companies-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.companies-table th {
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+.companies-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.companies-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.companies-table td {
+    color: #555;
+}
