@@ -6,10 +6,7 @@ import com.jaxws.services.AuthService;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
 import jakarta.jws.WebService;
-import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
-
-import java.sql.SQLException;
 
 @WebService(name = "AuthController", serviceName = "AuthController")
 @XmlRootElement(name = "AUTH_RESPONSE")

@@ -173,6 +173,15 @@ public class User implements Serializable {
         return active;
     }
 
+    @XmlElement(name = "ROLE")
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     public void setActive(boolean active) {
         this.active = active;
     }

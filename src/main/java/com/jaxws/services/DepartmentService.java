@@ -1,10 +1,8 @@
 package com.jaxws.services;
 
 import com.jaxws.db.DbConnection;
-import com.jaxws.dtos.CompanyDto;
 import com.jaxws.dtos.DepartmentDto;
 import com.jaxws.dtos.Response;
-import com.jaxws.models.Company;
 import com.jaxws.models.Department;
 import com.jaxws.utils.Handler;
 
@@ -90,7 +88,7 @@ public class DepartmentService {
             dbConnection.disconnect();
             disconnect();
         }
-        response.setData(departments);
+        response.setDepartments(departments);
         return response;
     }
 

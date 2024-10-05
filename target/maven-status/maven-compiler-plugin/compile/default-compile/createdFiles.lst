@@ -1,4 +1,7 @@
+com\jaxws\controllers\DepartmentController.class
+com\jaxws\models\Department.class
 com\jaxws\dtos\CompanyDto.class
+com\jaxws\services\DepartmentService.class
 com\jaxws\filter\CORSFilter.class
 com\jaxws\utils\HashUtil.class
 com\jaxws\services\UserService.class
@@ -14,3 +17,4 @@ com\jaxws\utils\Handler.class
 com\jaxws\services\AuthService.class
 com\jaxws\utils\JwtUtil.class
 com\jaxws\dtos\UserDto.class
+com\jaxws\dtos\DepartmentDto.class

@@ -3,13 +3,9 @@ package com.jaxws.services;
 import com.jaxws.db.DbConnection;
 import com.jaxws.dtos.CompanyDto;
 import com.jaxws.dtos.Response;
-import com.jaxws.dtos.UserDto;
 import com.jaxws.models.Company;
-import com.jaxws.models.User;
 import com.jaxws.utils.Handler;
-import com.jaxws.utils.HashUtil;
 
-import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -95,7 +91,7 @@ public class CompanyService {
             dbConnection.disconnect();
             disconnect();
         }
-        response.setData(companies);
+        response.setCompanies(companies);
         return response;
     }
 
