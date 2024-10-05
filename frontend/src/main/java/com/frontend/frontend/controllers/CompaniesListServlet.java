@@ -11,6 +11,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/*
+
 @WebServlet("/companiesList")
 public class CompaniesListServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -37,3 +39,4 @@ public class CompaniesListServlet extends HttpServlet {
     }
 }
 
+*/
