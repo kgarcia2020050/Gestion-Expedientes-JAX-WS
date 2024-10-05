@@ -67,7 +67,7 @@ public class AuthService {
         DbConnection dbConnection = new DbConnection();
         try {
             connection = dbConnection.connect();
-            String sql = "SELECT id, password FROM [user] WHERE email = ?";
+            String sql = "SELECT id, password, role FROM [user] WHERE email = ?";
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, email);
             resultSet = preparedStatement.executeQuery();
@@ -76,10 +76,12 @@ public class AuthService {
             if (resultSet.next()) {
 
                 String hashedPassword = resultSet.getString("password");
+                String role = resultSet.getString("role");
 
                 if (hashUtil.verifyPassword(password, hashedPassword)) {
                     String token = JwtUtil.generateToken(email, resultSet.getString("id"));
                     response.setToken(token);
+                    response.setRole(role);
                 } else {
                     response.setMessage("Credenciales inválidas.");
                     response.setStatus(401);
@@ -110,7 +112,7 @@ public class AuthService {
     public Response registerUser(UserDto userDto) {
         Response response = new Response();
         DbConnection dbConnection = new DbConnection();
-        User myUser = new User(userDto.getEmail(), userDto.getFirstName(), userDto.getPassword(), userDto.getLastName(), true);
+        User myUser = new User(userDto.getEmail(), userDto.getFirstName(), userDto.getPassword(), userDto.getLastName(), true, userDto.getRole());
         try {
 
             myUser.setPassword(hashUtil.hashPassword(myUser.getPassword()));
@@ -132,7 +134,6 @@ public class AuthService {
                 response.setMessage("Usuario registrado correctamente.");
                 response.setStatus(200);
                 response.setSuccess(true);
-
             }
         } catch (SQLException ex) {
             ex.printStackTrace();

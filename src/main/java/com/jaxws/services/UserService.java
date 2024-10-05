@@ -91,7 +91,7 @@ public class UserService {
     public Response createUser(UserDto user) throws SQLException {
         Response response = new Response();
         DbConnection dbConnection = new DbConnection();
-        User myUser = new User(user.getEmail(), user.getFirstName(), user.getPassword(), user.getLastName(), handler.getUserId(), handler.getUserId(), true);
+        User myUser = new User(user.getEmail(), user.getFirstName(), user.getPassword(), user.getLastName(), handler.getUserId(), handler.getUserId(), true, user.getRole());
         try {
 
             myUser.setPassword(hashUtil.hashPassword(myUser.getPassword()));
@@ -138,7 +138,7 @@ public class UserService {
     public Response updateUser(UserDto user, int id) throws SQLException {
         Response response = new Response();
         DbConnection dbConnection = new DbConnection();
-        User myUser = new User(user.getEmail(), user.getFirstName(), user.getPassword(), user.getLastName(), handler.getUserId(), true);
+        User myUser = new User(user.getEmail(), user.getFirstName(), user.getPassword(), user.getLastName(), handler.getUserId(), true, user.getRole());
         myUser.setId(id);
         try {
 

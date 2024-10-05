@@ -28,6 +28,7 @@ public class RegisterServlet extends HttpServlet {
         userRequest.setFIRSTNAME(firstName);
         userRequest.setLASTNAME(lastName);
         userRequest.setPASSWORD(password);
+        userRequest.setROLE("EMPLOYEE");
 
         Response createUserResponse = port.register(userRequest);
 

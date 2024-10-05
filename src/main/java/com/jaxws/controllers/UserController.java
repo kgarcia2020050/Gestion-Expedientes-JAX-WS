@@ -34,7 +34,6 @@ public class UserController {
     @WebMethod(operationName = "CREATE_USER", action = "CREATE_USER")
     public Response register(UserDto user) {
         try {
-
             return userService.createUser(user);
         } catch (SQLException e) {
             throw new RuntimeException(e);

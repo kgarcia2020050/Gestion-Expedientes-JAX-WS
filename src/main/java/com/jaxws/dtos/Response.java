@@ -10,6 +10,8 @@ import java.util.List;
 public class Response {
     private String message;
     private String token;
+
+    private String role;
     private int status;
     private List<?> data;
 
@@ -71,4 +73,8 @@ public class Response {
     public void setToken(String token) {
         this.token = token;
     }
+
+    @XmlElement(name = "ROLE")
+    public String getRole() { return role; }
+    public void setRole(String role) { this.role = role; }
 }
