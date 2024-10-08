@@ -37,7 +37,7 @@ public class LoginServlet extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "/views/error-page/notFound.jsp");
             }
         } else {
-            request.setAttribute("errorMessage", "Credenciales inválidas. Intente nuevamente.");
+            request.getSession().setAttribute("errorMessage", "Credenciales inválidas. Intente nuevamente.");
             request.getRequestDispatcher(request.getContextPath() + "/components/public/auth/login.jsp").forward(request, response);
         }
 

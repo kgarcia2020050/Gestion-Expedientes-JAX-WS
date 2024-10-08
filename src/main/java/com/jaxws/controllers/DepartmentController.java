@@ -11,7 +11,7 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 
 @WebService(name = "DepartmentController", serviceName = "DepartmentController")
 @XmlRootElement(name = "DEPARTMENT_RESPONSE")
-@HandlerChain(file = "handler-chain.xml")
+//@HandlerChain(file = "handler-chain.xml")
 public class DepartmentController {
     private final DepartmentService departmentService;
 

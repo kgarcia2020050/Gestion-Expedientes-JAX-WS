@@ -8,10 +8,13 @@ public class DbConnection {
     public Connection connection;
 
     public DbConnection() {
+
+        //Credenciales Kenneth
         this.user = "sa";
         this.password = "Car64669!";
         this.url = "jdbc:sqlserver://localhost:1433;databaseName=case_management_system;encrypt=false;trustServerCertificate=true";
         this.driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+
         this.connection = null;
     }
 

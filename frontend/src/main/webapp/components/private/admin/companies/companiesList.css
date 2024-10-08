@@ -1,3 +1,9 @@
+.main-content {
+    margin-left: 20vw;
+    margin-top: 7vh;
+    padding: 20px;
+}
+
 .container {
     max-width: 1200px;
     margin: 50px auto;
@@ -39,4 +45,49 @@ h1 {
 
 .companies-table td {
     color: #555;
+}
+
+/* Estilo base para los botones */
+.btn {
+    padding: 10px 15px;
+    font-size: 14px;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none; /* Eliminar subrayado en enlaces */
+    transition: background-color 0.3s, transform 0.2s; /* Transiciones suaves */
+    margin-right: 5px; /* Espacio entre botones */
+}
+
+/* Estilo para el botón "Añadir" */
+.btn-primary {
+    background-color: #007bff; /* Color azul */
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Color azul más oscuro al pasar el ratón */
+}
+
+/* Estilo para el botón "Editar" */
+.btn-edit {
+    background-color: #28a745; /* Color verde */
+}
+
+.btn-edit:hover {
+    background-color: #218838; /* Color verde más oscuro al pasar el ratón */
+}
+
+/* Estilo para el botón "Eliminar" */
+.btn-delete {
+    background-color: #dc3545; /* Color rojo */
+}
+
+.btn-delete:hover {
+    background-color: #c82333; /* Color rojo más oscuro al pasar el ratón */
+}
+
+/* Opcional: Estilo para el formulario de eliminación */
+form {
+    display: inline; /* Mantener el formulario en la misma línea que otros elementos */
 }

@@ -12,9 +12,6 @@
     <div class="background-shape"></div>
     <h3>Iniciar Sesión</h3>
 
-    <c:if test="${not empty errorMessage}">
-        <div class="error-message">${errorMessage}</div>
-    </c:if>
 
     <form id="loginForm" action="${pageContext.request.contextPath}/login" method="post">
         <div class="icon-input">
@@ -27,9 +24,13 @@
             <input type="password" id="password" name="password" placeholder="Contraseña" required>
         </div>
 
+        <c:if test="${not empty errorMessage}">
+            <div class="error-message">${errorMessage}</div>
+        </c:if>
+
         <button type="submit">Iniciar Sesión</button>
     </form>
-    <a href="register.jsp" class="register-link">Crear una cuenta nueva</a>
+    <a href="${pageContext.request.contextPath}/components/public/auth/register.jsp" class="register-link">Crear una cuenta nueva</a>
 </div>
 
 </body>

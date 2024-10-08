@@ -12,7 +12,7 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 
 @WebService(name = "UserController", serviceName = "UserController")
 @XmlRootElement(name = "USER_RESPONSE")
-@HandlerChain(file = "handler-chain.xml")
+//@HandlerChain(file = "handler-chain.xml")
 public class UserController {
 
     private final UserService userService;

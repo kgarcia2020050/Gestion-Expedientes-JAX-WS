@@ -55,7 +55,7 @@ public class UserService {
     }
 
 
-    public Response getUsers()  {
+    public Response getUsers() {
         List<User> users = new ArrayList<>();
         DbConnection dbConnection = new DbConnection();
 
@@ -98,7 +98,7 @@ public class UserService {
     }
 
 
-    public Response createUser(UserDto user)  {
+    public Response createUser(UserDto user) {
         Response response = new Response();
         DbConnection dbConnection = new DbConnection();
         User myUser = new User(user.getEmail(), user.getFirstName(), user.getPassword(), user.getLastName(), handler.getUserId(), handler.getUserId(), true, user.getRole());
@@ -145,7 +145,7 @@ public class UserService {
         return response;
     }
 
-    public Response updateUser(UserDto user, int id)  {
+    public Response updateUser(UserDto user, int id) {
         Response response = new Response();
         DbConnection dbConnection = new DbConnection();
         User myUser = new User(user.getEmail(), user.getFirstName(), user.getPassword(), user.getLastName(), handler.getUserId(), true, user.getRole());
@@ -190,7 +190,7 @@ public class UserService {
     }
 
 
-    public Response deleteUser(int id)  {
+    public Response deleteUser(int id) {
         Response response = new Response();
         DbConnection dbConnection = new DbConnection();
         try {

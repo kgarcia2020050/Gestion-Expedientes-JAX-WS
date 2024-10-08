@@ -34,7 +34,7 @@
 
         <button type="submit">Registrar</button>
     </form>
-    <a href="login.jsp" class="login-link">Iniciar sesión</a>
+    <a href="${pageContext.request.contextPath}/components/public/auth/login.jsp" class="login-link">Iniciar sesión</a>
 </div>
 
 </body>
