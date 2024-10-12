@@ -1,5 +1,6 @@
 package com.jaxws.controllers;
 
+import com.jaxws.dtos.Request;
 import com.jaxws.dtos.Response;
 import com.jaxws.dtos.UserDto;
 import com.jaxws.services.UserService;
@@ -12,7 +13,6 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 
 @WebService(name = "UserController", serviceName = "UserController")
 @XmlRootElement(name = "USER_RESPONSE")
-//@HandlerChain(file = "handler-chain.xml")
 public class UserController {
 
     private final UserService userService;
@@ -21,31 +21,60 @@ public class UserController {
         this.userService = new UserService();
     }
 
+    private static final String ERROR_MESSAGE = "Missing or invalid Authorization header";
+
 
     @WebMethod(operationName = "GET_USERS", action = "GET_USERS")
     @XmlElement(name = "USER")
-    public Response getAllUsers()  {
-        return userService.getUsers();
+    public Response getAllUsers(Request request) {
+
+        if (!request.getAuthToken().isEmpty() && request.validateToken()) {
+            return userService.getUsers();
+
+        } else {
+            throw new SecurityException(ERROR_MESSAGE);
+
+        }
+
 
     }
 
 
     @WebMethod(operationName = "CREATE_USER", action = "CREATE_USER")
     public Response register(UserDto user) {
-        return userService.createUser(user);
+
+        if (!user.getAuthToken().isEmpty() && user.validateToken()) {
+            return userService.createUser(user);
+        } else {
+            throw new SecurityException(ERROR_MESSAGE);
+        }
+
     }
 
 
     @WebMethod(operationName = "UPDATE_USER", action = "UPDATE_USER")
     public Response updateUser(UserDto user, @WebParam(name = "ID") int id) {
-        return userService.updateUser(user, id);
+
+        if (!user.getAuthToken().isEmpty() && user.validateToken()) {
+            return userService.updateUser(user, id);
+        } else {
+            throw new SecurityException(ERROR_MESSAGE);
+        }
+
 
     }
 
 
     @WebMethod(operationName = "DELETE_USER", action = "DELETE_USER")
-    public Response deleteUser(@WebParam(name = "ID") int id) {
-        return userService.deleteUser(id);
+    public Response deleteUser(@WebParam(name = "ID") int id, Request request) {
+
+
+        if (!request.getAuthToken().isEmpty() && request.validateToken()) {
+            return userService.deleteUser(id);
+        } else {
+            throw new SecurityException(ERROR_MESSAGE);
+        }
+
 
     }
 

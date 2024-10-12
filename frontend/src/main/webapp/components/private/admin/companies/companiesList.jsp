@@ -37,7 +37,7 @@
             </thead>
             <tbody>
             <%
-                List<Company> companies = (List<Company>) request.getAttribute("companies");
+                List<Company> companies = (List<Company>) session.getAttribute("companies");
                 if (companies != null && !companies.isEmpty()) {
                     for (Company company : companies) {
             %>
@@ -55,17 +55,16 @@
                 <td><%= company.getECONOMICACTIVITY() %>
                 </td>
                 <td>
+
+
                     <a href="${pageContext.request.contextPath}/companies?action=edit&id=<%= company.getID() %>"
                        class="btn btn-edit">Editar</a>
 
-                    <form action="${pageContext.request.contextPath}/deleteCompany" method="post"
-                          style="display:inline;">
-                        <input type="hidden" name="id" value="<%= company.getID() %>"/>
-                        <button type="submit" class="btn btn-delete"
-                                onclick="return confirm('¿Estás seguro de que quieres eliminar esta compañía?');">
-                            Eliminar
-                        </button>
-                    </form>
+                    <button class="btn btn-delete" style="display:inline;"
+                            onclick='deleteUser("${pageContext.request.contextPath}/companies?action=delete&id=<%= company.getID() %>")'>
+
+                        Eliminar
+                    </button>
                 </td>
             </tr>
             <%
@@ -83,5 +82,7 @@
     </div>
 </div>
 
+<%@ include file="../../../../layout/footer.jsp" %>
+<script src="${pageContext.request.contextPath}/components/private/admin/companies/companiesList.js"></script>
 </body>
 </html>

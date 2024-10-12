@@ -1,8 +1,12 @@
 package com.jaxws.dtos;
 
-import java.sql.Date;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
-public class DepartmentDto {
+import java.io.Serializable;
+
+@XmlRootElement
+
+public class DepartmentDto extends Request implements Serializable {
 
     private int companyId;
     private String name;

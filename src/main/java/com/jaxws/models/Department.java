@@ -19,6 +19,8 @@ public class Department implements Serializable {
     private Date createdAt;
     private Date updatedAt;
 
+    private boolean active;
+
 
     public long getDate() {
         java.util.Date actualDate = new Date(System.currentTimeMillis());
@@ -111,5 +113,15 @@ public class Department implements Serializable {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    @XmlElement(name = "IS_ACTIVE")
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

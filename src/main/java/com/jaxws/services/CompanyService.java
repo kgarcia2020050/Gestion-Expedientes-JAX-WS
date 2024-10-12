@@ -4,7 +4,6 @@ import com.jaxws.db.DbConnection;
 import com.jaxws.dtos.CompanyDto;
 import com.jaxws.dtos.Response;
 import com.jaxws.models.Company;
-import com.jaxws.utils.Handler;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -18,13 +17,11 @@ public class CompanyService {
 
     PreparedStatement preparedStatement;
 
-    private final Handler handler;
 
     public CompanyService() {
         this.statement = null;
         this.resultSet = null;
         this.preparedStatement = null;
-        this.handler = new Handler();
     }
 
     public void disconnect() {
@@ -51,7 +48,7 @@ public class CompanyService {
         }
     }
 
-    public Response getCompanies()  {
+    public Response getCompanies() {
         List<Company> companies = new ArrayList<>();
         DbConnection dbConnection = new DbConnection();
 
@@ -60,7 +57,7 @@ public class CompanyService {
         try {
             connection = dbConnection.connect();
             statement = connection.createStatement();
-            String SELECT_ALL_COMPANIES = "SELECT * FROM [company]";
+            String SELECT_ALL_COMPANIES = "SELECT * FROM [company] WHERE active = 1";
             resultSet = statement.executeQuery(SELECT_ALL_COMPANIES);
 
             while (resultSet.next()) {
@@ -96,7 +93,7 @@ public class CompanyService {
     }
 
 
-    public Response createCompany(CompanyDto companyDto)  {
+    public Response createCompany(CompanyDto companyDto) {
         Response response = new Response();
         DbConnection dbConnection = new DbConnection();
         Company company = new Company(companyDto.getName(), companyDto.getAddress(), companyDto.getPhone(),
@@ -114,7 +111,7 @@ public class CompanyService {
             preparedStatement.setString(4, company.getEmail());
             preparedStatement.setString(5, company.getIdIdentification());
             preparedStatement.setString(6, company.getEconomicActivity());
-            preparedStatement.setInt(7, handler.getUserId());
+            preparedStatement.setInt(7, companyDto.getIdToken());
             preparedStatement.setDate(8, company.getCreatedAt());
 
             int rowsInserted = preparedStatement.executeUpdate();
@@ -138,7 +135,7 @@ public class CompanyService {
     }
 
 
-    public Response updateCompany(CompanyDto companyDto, int id)  {
+    public Response updateCompany(CompanyDto companyDto, int id) {
         Response response = new Response();
         DbConnection dbConnection = new DbConnection();
         Company company = new Company(companyDto.getName(), companyDto.getAddress(), companyDto.getPhone(),
@@ -148,7 +145,7 @@ public class CompanyService {
             connection = dbConnection.connect();
 
             String sql = "UPDATE [company] SET name = ?, address = ?, phone = ?, " +
-                    "email = ?, id_identification = ?, economic_activity = ?, updated_by = ?, updated_at = ? WHERE id = ?";
+                    "email = ?, id_identification = ?, economic_activity = ?, updated_by = ?, updated_at = ? WHERE id = ? AND active = 1";
             preparedStatement = connection.prepareStatement(sql);
 
             preparedStatement.setString(1, company.getName());
@@ -157,7 +154,7 @@ public class CompanyService {
             preparedStatement.setString(4, company.getEmail());
             preparedStatement.setString(5, company.getIdIdentification());
             preparedStatement.setString(6, company.getEconomicActivity());
-            preparedStatement.setInt(7, handler.getUserId());
+            preparedStatement.setInt(7, companyDto.getIdToken());
             preparedStatement.setDate(8, company.getUpdatedAt());
             preparedStatement.setInt(9, id);
 
@@ -182,14 +179,14 @@ public class CompanyService {
     }
 
 
-    public Response deleteCompany(int id)  {
+    public Response deleteCompany(int id) {
         Response response = new Response();
         DbConnection dbConnection = new DbConnection();
         try {
 
             connection = dbConnection.connect();
 
-            String sql = "DELETE FROM [company] WHERE id = ?";
+            String sql = "UPDATE [company] SET active = 0 WHERE id = ?";
             preparedStatement = connection.prepareStatement(sql);
 
             preparedStatement.setInt(1, id);

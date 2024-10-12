@@ -4,7 +4,6 @@ import com.jaxws.db.DbConnection;
 import com.jaxws.dtos.DepartmentDto;
 import com.jaxws.dtos.Response;
 import com.jaxws.models.Department;
-import com.jaxws.utils.Handler;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -18,13 +17,11 @@ public class DepartmentService {
 
     PreparedStatement preparedStatement;
 
-    private final Handler handler;
 
     public DepartmentService() {
         this.statement = null;
         this.resultSet = null;
         this.preparedStatement = null;
-        this.handler = new Handler();
     }
 
     public void disconnect() {
@@ -93,7 +90,7 @@ public class DepartmentService {
     }
 
 
-    public Response createDepartment(DepartmentDto departmentDto)  {
+    public Response createDepartment(DepartmentDto departmentDto) {
         Response response = new Response();
         DbConnection dbConnection = new DbConnection();
         Department department = new Department(departmentDto.getCompanyId(), departmentDto.getName(), departmentDto.getDescription());
@@ -107,7 +104,7 @@ public class DepartmentService {
             preparedStatement.setString(1, department.getName());
             preparedStatement.setInt(2, department.getCompanyId());
             preparedStatement.setString(3, department.getDescription());
-            preparedStatement.setInt(4, handler.getUserId());
+            preparedStatement.setInt(4, departmentDto.getIdToken());
             preparedStatement.setDate(5, department.getCreatedAt());
 
             int rowsInserted = preparedStatement.executeUpdate();
@@ -145,7 +142,7 @@ public class DepartmentService {
             preparedStatement.setString(1, department.getName());
             preparedStatement.setInt(2, department.getCompanyId());
             preparedStatement.setString(3, department.getDescription());
-            preparedStatement.setInt(4, handler.getUserId());
+            preparedStatement.setInt(4, departmentDto.getIdToken());
             preparedStatement.setDate(5, department.getUpdatedAt());
             preparedStatement.setInt(6, id);
 
@@ -176,7 +173,7 @@ public class DepartmentService {
 
             connection = dbConnection.connect();
 
-            String sql = "DELETE FROM [department] WHERE id = ?";
+            String sql = "UPDATE [department] SET active = 0 WHERE id = ?";
             preparedStatement = connection.prepareStatement(sql);
 
             preparedStatement.setInt(1, id);

@@ -85,10 +85,12 @@
                 <configuration>
                     <packageName>com.frontend.frontend.wsdl</packageName>
                     <wsdlUrls>
-                        <wsdlUrl>http://DESKTOP-5QHEAJA:8080/jaxws-1.0-SNAPSHOT/DepartmentController?wsdl</wsdlUrl>
-                        <wsdlUrl>http://DESKTOP-5QHEAJA:8080/jaxws-1.0-SNAPSHOT/CompanyController?wsdl</wsdlUrl>
-                        <wsdlUrl>http://DESKTOP-5QHEAJA:8080/jaxws-1.0-SNAPSHOT/UserController?wsdl</wsdlUrl>
-                        <wsdlUrl>http://DESKTOP-5QHEAJA:8080/jaxws-1.0-SNAPSHOT/AuthController?wsdl</wsdlUrl>
+
+                        <!--WSDLS DE KENNETH-->
+                        <wsdlUrl>http://desktop-5qheaja:8080/jaxws-1.0-SNAPSHOT/DepartmentController?wsdl</wsdlUrl>
+                        <wsdlUrl>http://desktop-5qheaja:8080/jaxws-1.0-SNAPSHOT/CompanyController?wsdl</wsdlUrl>
+                        <wsdlUrl>http://desktop-5qheaja:8080/jaxws-1.0-SNAPSHOT/UserController?wsdl</wsdlUrl>
+                        <wsdlUrl>http://desktop-5qheaja:8080/jaxws-1.0-SNAPSHOT/AuthController?wsdl</wsdlUrl>
                     </wsdlUrls>
                     <extension>true</extension>
                 </configuration>

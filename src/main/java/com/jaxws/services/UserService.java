@@ -4,7 +4,6 @@ import com.jaxws.db.DbConnection;
 import com.jaxws.dtos.Response;
 import com.jaxws.dtos.UserDto;
 import com.jaxws.models.User;
-import com.jaxws.utils.Handler;
 import com.jaxws.utils.HashUtil;
 
 import java.security.NoSuchAlgorithmException;
@@ -21,13 +20,11 @@ public class UserService {
 
     HashUtil hashUtil = new HashUtil();
 
-    private final Handler handler;
 
     public UserService() {
         this.statement = null;
         this.resultSet = null;
         this.preparedStatement = null;
-        this.handler = new Handler();
     }
 
     public void disconnect() {
@@ -101,7 +98,7 @@ public class UserService {
     public Response createUser(UserDto user) {
         Response response = new Response();
         DbConnection dbConnection = new DbConnection();
-        User myUser = new User(user.getEmail(), user.getFirstName(), user.getPassword(), user.getLastName(), handler.getUserId(), handler.getUserId(), true, user.getRole());
+        User myUser = new User(user.getEmail(), user.getFirstName(), user.getPassword(), user.getLastName(), user.getIdToken(), user.getIdToken(), true, user.getRole());
         try {
 
             myUser.setPassword(hashUtil.hashPassword(myUser.getPassword()));
@@ -148,7 +145,7 @@ public class UserService {
     public Response updateUser(UserDto user, int id) {
         Response response = new Response();
         DbConnection dbConnection = new DbConnection();
-        User myUser = new User(user.getEmail(), user.getFirstName(), user.getPassword(), user.getLastName(), handler.getUserId(), true, user.getRole());
+        User myUser = new User(user.getEmail(), user.getFirstName(), user.getPassword(), user.getLastName(), user.getIdToken(), true, user.getRole());
         myUser.setId(id);
         try {
 

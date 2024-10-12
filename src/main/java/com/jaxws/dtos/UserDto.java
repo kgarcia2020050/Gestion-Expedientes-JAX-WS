@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @XmlRootElement
-public class UserDto implements Serializable {
+public class UserDto extends Request implements Serializable {
     private String email;
     private String password;
     private String firstName;

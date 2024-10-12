@@ -1,6 +1,7 @@
 package com.jaxws.controllers;
 
 import com.jaxws.dtos.DepartmentDto;
+import com.jaxws.dtos.Request;
 import com.jaxws.dtos.Response;
 import com.jaxws.services.DepartmentService;
 import jakarta.jws.HandlerChain;
@@ -11,7 +12,6 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 
 @WebService(name = "DepartmentController", serviceName = "DepartmentController")
 @XmlRootElement(name = "DEPARTMENT_RESPONSE")
-//@HandlerChain(file = "handler-chain.xml")
 public class DepartmentController {
     private final DepartmentService departmentService;
 
@@ -19,25 +19,55 @@ public class DepartmentController {
         this.departmentService = new DepartmentService();
     }
 
+    private static final String ERROR_MESSAGE = "Missing or invalid Authorization header";
+
+
     @WebMethod(operationName = "GET_DEPARTMENTS", action = "GET_DEPARTMENTS")
     @XmlElement(name = "DEPARTMENT")
-    public Response getDepartments()  {
-        return departmentService.getDepartments();
+    public Response getDepartments(Request request) {
+
+        if (!request.getAuthToken().isEmpty() && request.validateToken()) {
+            return departmentService.getDepartments();
+
+        } else {
+            throw new SecurityException(ERROR_MESSAGE);
+        }
+
+
     }
 
     @WebMethod(operationName = "CREATE_DEPARTMENT", action = "CREATE_DEPARTMENT")
     public Response createDepartment(@XmlElement(name = "DEPARTMENT") DepartmentDto department) {
-        return departmentService.createDepartment(department);
+
+        if (!department.getAuthToken().isEmpty() && department.validateToken()) {
+            return departmentService.createDepartment(department);
+
+        } else {
+
+            throw new SecurityException(ERROR_MESSAGE);
+        }
+
     }
 
     @WebMethod(operationName = "UPDATE_DEPARTMENT", action = "UPDATE_DEPARTMENT")
-    public Response updateDepartment(@XmlElement(name = "DEPARTMENT") DepartmentDto department, @XmlElement(name = "ID") int id)  {
-        return departmentService.updateDepartment(department, id);
+    public Response updateDepartment(@XmlElement(name = "DEPARTMENT") DepartmentDto department, @XmlElement(name = "ID") int id) {
+
+        if (!department.getAuthToken().isEmpty() && department.validateToken()) {
+            return departmentService.updateDepartment(department, id);
+        } else {
+            throw new SecurityException(ERROR_MESSAGE);
+        }
+
     }
 
     @WebMethod(operationName = "DELETE_DEPARTMENT", action = "DELETE_DEPARTMENT")
-    public Response deleteDepartment(@XmlElement(name = "ID") int id)  {
-        return departmentService.deleteDepartment(id);
+    public Response deleteDepartment(@XmlElement(name = "ID") int id, Request request) {
+
+        if (!request.getAuthToken().isEmpty() && request.validateToken()) {
+            return departmentService.deleteDepartment(id);
+        } else {
+            throw new SecurityException(ERROR_MESSAGE);
+        }
     }
 
 }

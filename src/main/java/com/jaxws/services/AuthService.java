@@ -56,7 +56,7 @@ public class AuthService {
         DbConnection dbConnection = new DbConnection();
         try {
             connection = dbConnection.connect();
-            String sql = "SELECT id, password, role FROM [user] WHERE email = ?";
+            String sql = "SELECT id, password, role FROM [user] WHERE email = ? AND active = 1";
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, email);
             resultSet = preparedStatement.executeQuery();

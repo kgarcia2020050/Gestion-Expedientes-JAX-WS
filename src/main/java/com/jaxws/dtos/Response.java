@@ -8,7 +8,7 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 
 import java.util.List;
 
-@XmlRootElement(name = "RESPONSE_USER")
+@XmlRootElement(name = "RESPONSE")
 public class Response {
     private String message;
     private String token;

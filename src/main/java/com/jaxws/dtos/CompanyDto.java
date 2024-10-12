@@ -1,6 +1,11 @@
 package com.jaxws.dtos;
 
-public class CompanyDto {
+import jakarta.xml.bind.annotation.XmlRootElement;
+
+import java.io.Serializable;
+
+@XmlRootElement
+public class CompanyDto extends Request implements Serializable {
 
 
     private String name;
