@@ -1,6 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/layout/sidebar/sidebar.css">
+<%
 
+    if (session.getAttribute("role") == null || session.getAttribute("role") == null) {
+        response.sendRedirect(request.getContextPath() + "/components/public/auth/login.jsp");
+    }
+%>
 <div class="sidebar">
     <ul>
         <li><a href="${pageContext.request.contextPath}/components/public/home/home.jsp"

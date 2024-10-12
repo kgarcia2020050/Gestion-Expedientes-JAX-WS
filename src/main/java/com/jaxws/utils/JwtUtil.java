@@ -1,8 +1,6 @@
 package com.jaxws.utils;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 
 import java.security.Key;
@@ -28,5 +26,18 @@ public class JwtUtil {
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
+    }
+
+    public static boolean isTokenValid(String token) {
+        try {
+            Claims claims = validateToken(token);
+            return !claims.getExpiration().before(new Date());
+        } catch (ExpiredJwtException e) {
+            System.out.println("Token expirado.");
+            return false;
+        } catch (JwtException e) {
+            System.out.println("Token inválido.");
+            return false;
+        }
     }
 }

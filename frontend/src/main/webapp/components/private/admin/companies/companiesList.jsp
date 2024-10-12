@@ -3,6 +3,21 @@
 <%@ include file="/layout/topbar/topbar.jsp" %>
 <%@ include file="/layout/sidebar/sidebar.jsp" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    String errorMessage = "";
+    String successMessage = "";
+    if (session.getAttribute("error") != null) {
+        errorMessage = (String) session.getAttribute("error");
+        session.removeAttribute("error");
+    }
+
+    if (session.getAttribute("success") != null) {
+        successMessage = (String) session.getAttribute("success");
+        session.removeAttribute("success");
+    }
+
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,11 +75,11 @@
                     <a href="${pageContext.request.contextPath}/companies?action=edit&id=<%= company.getID() %>"
                        class="btn btn-edit">Editar</a>
 
-                    <button class="btn btn-delete" style="display:inline;"
-                            onclick='deleteUser("${pageContext.request.contextPath}/companies?action=delete&id=<%= company.getID() %>")'>
-
+                    <a href="${pageContext.request.contextPath}/companies?action=drop&id=<%= company.getID() %>"
+                       class="btn btn-delete" style="display:inline;"
+                    >
                         Eliminar
-                    </button>
+                    </a>
                 </td>
             </tr>
             <%
@@ -84,5 +99,26 @@
 
 <%@ include file="../../../../layout/footer.jsp" %>
 <script src="${pageContext.request.contextPath}/components/private/admin/companies/companiesList.js"></script>
+<script>
+    const errorMessage = "<%= errorMessage %>";
+    const successMessage = "<%= successMessage %>";
+    if (errorMessage.length > 0) {
+        console.log("ENTRA")
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: errorMessage
+        });
+    }
+
+    if (successMessage.length > 0) {
+        Swal.fire({
+            icon: 'success',
+            title: '¡Éxito!',
+            text: successMessage
+        });
+    }
+
+</script>
 </body>
 </html>

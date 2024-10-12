@@ -14,6 +14,7 @@ const deleteUser = (url) => {
                 method: 'POST'
             })
                 .then(response => {
+                    console.log("RESPONSE: " + response)
                     if (response.ok) {
                         Swal.fire({
                             title: 'Eliminado',

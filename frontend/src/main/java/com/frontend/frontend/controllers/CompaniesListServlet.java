@@ -30,7 +30,7 @@ public class CompaniesListServlet extends HttpServlet {
     }
 
     private void cleanParams(HttpServletRequest request) {
-        request.getSession().removeAttribute("error");
+//        request.getSession().removeAttribute("error");
         request.getSession().removeAttribute("company");
         request.getSession().removeAttribute("id");
         request.getSession().removeAttribute("companyId");
@@ -38,14 +38,14 @@ public class CompaniesListServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
-
+        System.out.println("ACTION: " + action);
         switch (action) {
             case "edit":
+            case "drop":
                 editCompany(request, response);
                 break;
             default:
                 System.out.println("ACCION NO VALIDA: " + action);
-
                 request.getSession().setAttribute("error", "Acción no válida");
                 redirect(request, response, LIST_COMPANIES_JSP);
                 break;
@@ -54,6 +54,8 @@ public class CompaniesListServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
+
+        System.out.println("ACTION: " + action);
 
         switch (action) {
             case "get":
@@ -145,6 +147,7 @@ public class CompaniesListServlet extends HttpServlet {
             Response createUserResponse = port.createCOMPANY(companyDto);
 
             if (createUserResponse.isSUCCESS()) {
+                request.getSession().setAttribute("success", "Compañía creada correctamente");
                 listCompanies(request, response);
             } else {
                 request.getSession().setAttribute("error", createUserResponse.getMESSAGE());
@@ -209,7 +212,6 @@ public class CompaniesListServlet extends HttpServlet {
             String actividadEconomica = request.getParameter("actividadEconomica");
             String idIdentification = request.getParameter("idIdentification");
 
-
             CompanyDto companyDto = new CompanyDto();
             companyDto.setName(nombre);
             companyDto.setAddress(direccion);
@@ -228,10 +230,10 @@ public class CompaniesListServlet extends HttpServlet {
             Response createUserResponse = port.updateCOMPANY(companyDto, Integer.parseInt(request.getParameter("companyId")));
 
             if (createUserResponse.isSUCCESS()) {
+                request.getSession().setAttribute("success", "Compañía actualizada correctamente");
                 listCompanies(request, response);
             } else {
                 request.getSession().setAttribute("error", createUserResponse.getMESSAGE());
-                redirect(request, response, LIST_COMPANIES_JSP);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -245,7 +247,8 @@ public class CompaniesListServlet extends HttpServlet {
 
     private void deleteCompany(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            String id = request.getParameter("id");
+            System.out.println("BORRANDO COMPANIA");
+            String id = request.getParameter("companyId");
             System.out.println("ID: " + id);
 
             if (id != null) {
@@ -258,13 +261,13 @@ public class CompaniesListServlet extends HttpServlet {
 
                     System.out.println("ERROR: " + loginSuccessful.getMESSAGE());
                     request.getSession().setAttribute("error", "Compañía no encontrada");
-                    redirect(request, response, LIST_COMPANIES_JSP);
-
+                } else {
+                    request.getSession().setAttribute("success", "Compañía eliminada correctamente");
+                    listCompanies(request, response);
                 }
             } else {
                 System.out.println("EXCEPTION: ID de compañía no proporcionado");
                 request.getSession().setAttribute("error", "ID de compañía no proporcionado");
-                redirect(request, response, LIST_COMPANIES_JSP);
             }
         } catch (Exception e) {
             e.printStackTrace();
