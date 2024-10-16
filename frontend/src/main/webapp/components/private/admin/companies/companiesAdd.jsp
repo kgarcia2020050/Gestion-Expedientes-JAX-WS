@@ -77,7 +77,8 @@
     }%>
 </h1>
 
-<form id="addCompany" action="${pageContext.request.contextPath}/companies" method="post">
+<form id="addCompany" action="${pageContext.request.contextPath}/companies" method="p
+ost">
     <% if (isDelete) { %>
     <input type="hidden" name="action" value="delete">
     <% } else { %>

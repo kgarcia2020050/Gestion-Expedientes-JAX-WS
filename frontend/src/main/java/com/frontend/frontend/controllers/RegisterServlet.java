@@ -15,27 +15,35 @@ import java.io.IOException;
 @WebServlet("/register")
 public class RegisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String firstName = request.getParameter("firstName");
-        String lastName = request.getParameter("lastName");
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
+        try {
+            String firstName = request.getParameter("firstName");
+            String lastName = request.getParameter("lastName");
+            String email = request.getParameter("email");
+            String password = request.getParameter("password");
 
-        AuthController_Service service = new AuthController_Service();
-        AuthController port = service.getAuthControllerPort();
+            AuthController_Service service = new AuthController_Service();
+            AuthController port = service.getAuthControllerPort();
 
-        UserDto userRequest = new UserDto();
-        userRequest.setEMAIL(email);
-        userRequest.setFIRSTNAME(firstName);
-        userRequest.setLASTNAME(lastName);
-        userRequest.setPASSWORD(password);
-        userRequest.setROLE("EMPLOYEE");
+            UserDto userRequest = new UserDto();
+            userRequest.setEMAIL(email);
+            userRequest.setFIRSTNAME(firstName);
+            userRequest.setLASTNAME(lastName);
+            userRequest.setPASSWORD(password);
+            userRequest.setROLE("EMPLOYEE");
 
-        Response createUserResponse = port.register(userRequest);
+            Response createUserResponse = port.register(userRequest);
 
-        if (createUserResponse.isSUCCESS()) {
-            response.sendRedirect(request.getContextPath() + "/components/public/auth/login.jsp");
-        } else {
-            response.sendRedirect(request.getContextPath() + "/views/error-page/notFound.jsp");
+            if (createUserResponse.isSUCCESS()) {
+                response.sendRedirect(request.getContextPath() + "/components/public/auth/login.jsp");
+            } else {
+                request.getSession().setAttribute("error", "Error al registrar usuario. Intente nuevamente.");
+                response.sendRedirect(request.getContextPath() + "/components/public/auth/register.jsp");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.getSession().setAttribute("error", "Error al registrarse: " + e.getMessage());
+            response.sendRedirect(request.getContextPath() + "/components/public/auth/register.jsp");
+
         }
     }
 }
