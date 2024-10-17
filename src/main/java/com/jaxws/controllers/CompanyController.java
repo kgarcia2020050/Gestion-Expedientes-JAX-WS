@@ -68,4 +68,11 @@ public class CompanyController {
 
     }
 
+    @WebMethod(operationName = "GET_COMPANY", action = "GET_COMPANY")
+    public  void getCompany() {
+         companyService.generateCompaniesReport();
+
+    }
+
+
 }

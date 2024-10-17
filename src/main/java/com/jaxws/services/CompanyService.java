@@ -4,10 +4,13 @@ import com.jaxws.db.DbConnection;
 import com.jaxws.dtos.CompanyDto;
 import com.jaxws.dtos.Response;
 import com.jaxws.models.Company;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
+import java.io.ByteArrayOutputStream;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class CompanyService {
 
@@ -209,6 +212,40 @@ public class CompanyService {
         }
 
         return response;
+    }
+
+    public void generateCompaniesReport() {
+        try {
+            DbConnection dbConnection = new DbConnection();
+
+            // Cargar el reporte Jasper desde la carpeta resources
+            JasperReport jasperReport = (JasperReport) JRLoader.loadObject(
+                    getClass().getResourceAsStream("/com/jaxws/reports/Cherry_1.jasper")
+            );
+
+            // Establecer conexión a la base de datos
+            Connection connection = dbConnection.connect();
+
+            // Consulta SQL para obtener los campos necesarios
+            String sql = "SELECT id, name, address, phone, email, economic_activity FROM company WHERE active = 1";
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+            // Crear un JRResultSetDataSource a partir del ResultSet
+            JRResultSetDataSource jrDataSource = new JRResultSetDataSource(resultSet);
+
+            // Llenar el reporte con los datos
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, new HashMap<>(), jrDataSource);
+
+            // Mostrar el reporte en una ventana
+            JasperViewer viewer = new JasperViewer(jasperPrint, false); // 'false' para no cerrar la app al cerrar la ventana
+            viewer.setTitle("Reporte de Empresas");
+            viewer.setVisible(true);
+
+
+        } catch (Exception e) {
+            System.out.println("Error al generar el reporte: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
 }

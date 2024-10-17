@@ -1,4 +1,20 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%
+    String errorMessage = "";
+    String successMessage = "";
+    if (session.getAttribute("error") != null) {
+        errorMessage = (String) session.getAttribute("error");
+        session.removeAttribute("error");
+    }
+
+    if (session.getAttribute("success") != null) {
+        successMessage = (String) session.getAttribute("success");
+        session.removeAttribute("success");
+    }
+
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,4 +54,26 @@
 </div>
 
 </body>
+<%@ include file="../../../layout/footer.jsp" %>
+<script>
+    const errorMessage = "<%= errorMessage %>";
+    const successMessage = "<%= successMessage %>";
+    if (errorMessage.length > 0) {
+        console.log("ENTRA")
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: errorMessage
+        });
+    }
+
+    if (successMessage.length > 0) {
+        Swal.fire({
+            icon: 'success',
+            title: '¡Éxito!',
+            text: successMessage
+        });
+    }
+
+</script>
 </html>
