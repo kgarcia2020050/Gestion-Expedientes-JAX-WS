@@ -1,5 +1,6 @@
 package com.frontend.frontend.controllers;
 
+import com.frontend.frontend.dtos.DtoCompany;
 import com.frontend.frontend.wsdl.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -8,8 +9,15 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.xml.ws.BindingProvider;
 import jakarta.xml.ws.handler.MessageContext;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -34,6 +42,7 @@ public class CompaniesListServlet extends HttpServlet {
         request.getSession().removeAttribute("company");
         request.getSession().removeAttribute("id");
         request.getSession().removeAttribute("companyId");
+        request.getSession().removeAttribute("reports");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -43,6 +52,9 @@ public class CompaniesListServlet extends HttpServlet {
             case "edit":
             case "drop":
                 editCompany(request, response);
+                break;
+            case "reports":
+                reports(request, response);
                 break;
             default:
                 System.out.println("ACCION NO VALIDA: " + action);
@@ -96,10 +108,6 @@ public class CompaniesListServlet extends HttpServlet {
 
             if (loginSuccessful.isSUCCESS()) {
                 List<Company> companies = loginSuccessful.getCOMPANIES();
-                System.out.println(companies.toString());
-                for (Company company : companies) {
-                    System.out.println(company.toString());
-                }
 
                 request.getSession().setAttribute("companies", companies);
 
@@ -275,6 +283,60 @@ public class CompaniesListServlet extends HttpServlet {
             request.getSession().setAttribute("error", "Error al actualizar la compañía: " + e.getMessage());
         } finally {
             redirect(request, response, LIST_COMPANIES_JSP);
+        }
+    }
+
+    protected void reports(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+
+            InputStream reportStream = getServletContext()
+                    .getResourceAsStream("/WEB-INF/reports/companies/Companies.jasper");
+            if (reportStream == null) {
+                throw new Exception("No se pudo cargar el archivo del reporte");
+            }
+
+            String authToken = (String) request.getSession().getAttribute("token");
+            System.out.println("TOKEN: " + authToken);
+
+            Request request1 = new Request();
+            request1.setAuthToken(authToken);
+            Response loginSuccessful = port.getCOMPANIES(request1);
+
+            if (loginSuccessful.isSUCCESS()) {
+                List<Company> companies = loginSuccessful.getCOMPANIES();
+
+                List<DtoCompany> companiesList = new ArrayList<>();
+
+                for(Company company : companies) {
+                    DtoCompany company1 = new DtoCompany();
+                    company1.setID_IDENTIFICATION(company.getIDIDENTIFICATION());
+                    company1.setNAME(company.getNAME());
+                    company1.setADDRESS(company.getADDRESS());
+                    company1.setPHONE(company.getPHONE());
+                    company1.setEMAIL(company.getEMAIL());
+                    company1.setECONOMIC_ACTIVITY(company.getECONOMICACTIVITY());
+                    companiesList.add(company1);
+                }
+
+                JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(companiesList);
+
+                Map<String, Object> parameters = new HashMap<>();
+                JasperPrint jasperPrint = JasperFillManager.fillReport(reportStream, parameters, dataSource);
+
+                response.setContentType("application/pdf");
+                response.setHeader("Content-Disposition", "inline; filename=Companies.pdf");
+
+                JasperExportManager.exportReportToPdfStream(jasperPrint, response.getOutputStream());
+                response.getOutputStream().flush();
+            } else {
+                request.getSession().setAttribute("error", loginSuccessful.getMESSAGE());
+                System.out.println("ERROR: " + loginSuccessful.getMESSAGE());
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("EXCEPTION: " + e.getMessage());
+            request.getSession().setAttribute("error", "Error al obtener las compañías: " + e.getMessage());
         }
     }
 

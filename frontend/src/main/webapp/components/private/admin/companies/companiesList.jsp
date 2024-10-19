@@ -36,16 +36,20 @@
         <div class="add-company-button">
             <a href="${pageContext.request.contextPath}/components/private/admin/companies/companiesAdd.jsp"
                class="btn btn-primary">Añadir Compañía</a>
+            <a href="${pageContext.request.contextPath}/companies?action=reports" class="btn btn-edit"
+               style="display:inline;"
+            >Reporte de Compañias</a>
         </div>
+
 
         <table class="companies-table">
             <thead>
             <tr>
                 <th>ID</th>
                 <th>Nombre</th>
-                <th>Dirección</th>
                 <th>Teléfono</th>
                 <th>Email</th>
+                <th>Dirección</th>
                 <th>Actividad Económica</th>
                 <th>Acciones</th>
             </tr>
@@ -57,15 +61,15 @@
                     for (Company company : companies) {
             %>
             <tr>
-                <td><%= company.getID() %>
+                <td><%= company.getIDIDENTIFICATION() %>
                 </td>
                 <td><%= company.getNAME() %>
-                </td>
-                <td><%= company.getADDRESS() %>
                 </td>
                 <td><%= company.getPHONE() %>
                 </td>
                 <td><%= company.getEMAIL() %>
+                </td>
+                <td><%= company.getADDRESS() %>
                 </td>
                 <td><%= company.getECONOMICACTIVITY() %>
                 </td>

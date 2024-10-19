@@ -1,0 +1,131 @@
+<!-- Created with Jaspersoft Studio version 7.0.0.final using JasperReports Library version 7.0.0-b478feaa9aab4375eba71de77b4ca138ad2f62aa  -->
+<jasperReport name="Companies" language="java" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c368610e-5bee-4e75-8f1e-ecda64380534">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="47"/>
+	<property name="ireport.y" value="451"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50.0" bold="false"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Times New Roman" fontSize="18.0" bold="false"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14.0" bold="true"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle mode="Opaque" backcolor="#F0EFEF">
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+		</conditionalStyle>
+	</style>
+	<dataset name="PieChartDataset" uuid="21b70311-b650-4678-a39c-887917366bf0"/>
+	<query language="SQL"><![CDATA[select id_identification, name, phone, email,
+address, economic_activity from
+company where active = 1]]></query>
+	<field name="ID_IDENTIFICATION" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="id_identification"/>
+		<property name="com.jaspersoft.studio.field.label" value="id_identification"/>
+	</field>
+	<field name="NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="name"/>
+		<property name="com.jaspersoft.studio.field.label" value="name"/>
+	</field>
+	<field name="PHONE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="phone"/>
+		<property name="com.jaspersoft.studio.field.label" value="phone"/>
+	</field>
+	<field name="EMAIL" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="email"/>
+		<property name="com.jaspersoft.studio.field.label" value="email"/>
+	</field>
+	<field name="ADDRESS" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="address"/>
+		<property name="com.jaspersoft.studio.field.label" value="address"/>
+	</field>
+	<field name="ECONOMIC_ACTIVITY" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="economic_activity"/>
+		<property name="com.jaspersoft.studio.field.label" value="economic_activity"/>
+	</field>
+	<title height="94" splitType="Stretch">
+		<element kind="frame" uuid="83f5e806-cc04-4161-87a9-07633f604bc1" mode="Opaque" x="-20" y="0" width="822" height="65" forecolor="#006699" backcolor="#006699">
+			<element kind="staticText" uuid="f5cd9ee0-5caa-4e48-8946-c7e84d82a845" x="9" y="0" width="799" height="65" fontSize="54.0" bold="false" hTextAlign="Center" style="Title">
+				<text><![CDATA[Compañias]]></text>
+			</element>
+		</element>
+		<element kind="frame" uuid="2a3d298d-90eb-4db1-919a-c9b2ed28c222" x="230" y="72" width="575" height="14">
+			<element kind="staticText" uuid="20a2e574-2f73-4bf6-9816-72ab092a2340" positionType="Float" x="-227" y="0" width="95" height="14" forecolor="#000000" fontName="Arial" fontSize="12.0" bold="true" style="Column header">
+				<text><![CDATA[ID]]></text>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5199e0a3-badb-4760-80cb-5feef7ed2a57"/>
+			</element>
+			<element kind="staticText" uuid="3d7ab431-2344-4e01-bc77-74f59be2cc2e" positionType="Float" x="-132" y="0" width="95" height="14" forecolor="#000000" fontName="Arial" fontSize="12.0" bold="true" style="Column header">
+				<text><![CDATA[Nombre]]></text>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c00fa746-68b6-4035-9f18-be098c464be5"/>
+			</element>
+			<element kind="staticText" uuid="622d4b38-9448-494b-96d3-91f0315cf1e9" positionType="Float" x="-37" y="1" width="95" height="14" forecolor="#000000" fontName="Arial" fontSize="12.0" bold="true" style="Column header">
+				<text><![CDATA[Teléfono]]></text>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="46e3d1ff-605b-4b3e-94de-91e3ac8d26a8"/>
+			</element>
+			<element kind="staticText" uuid="5da81d6f-351f-4361-a37b-3529f147fc7d" positionType="Float" x="58" y="1" width="136" height="14" forecolor="#000000" fontName="Arial" fontSize="12.0" bold="true" style="Column header">
+				<text><![CDATA[Email]]></text>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3abdeb4-9919-4d3a-8b9a-640b9ae4f9ff"/>
+			</element>
+			<element kind="staticText" uuid="2a7207ba-a26b-45d3-8373-7a65b017ac7d" positionType="Float" x="260" y="0" width="95" height="14" forecolor="#000000" fontName="Arial" fontSize="12.0" bold="true" style="Column header">
+				<text><![CDATA[Dirección]]></text>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="13bbc4ec-7601-4c03-9fcb-8c3edea8b7a3"/>
+			</element>
+			<element kind="staticText" uuid="2fbc4dbe-3b99-46bd-a033-92be6a9ec54f" positionType="Float" x="420" y="0" width="95" height="14" forecolor="#000000" fontName="Arial" fontSize="12.0" bold="true" style="Column header">
+				<text><![CDATA[Actividad]]></text>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="928a936a-f325-45ab-91ab-5603f454a265"/>
+			</element>
+		</element>
+		<property name="com.jaspersoft.studio.layout"/>
+	</title>
+	<pageHeader splitType="Stretch"/>
+	<columnHeader height="14" splitType="Stretch"/>
+	<detail>
+		<band height="19" splitType="Stretch">
+			<element kind="line" uuid="ad4e998c-7071-4467-b7fa-4441cc53d3f6" positionType="FixRelativeToBottom" x="0" y="15" width="795" height="1"/>
+			<element kind="frame" uuid="822bafe9-34ee-4b4f-aa76-3eae029c4911" x="95" y="1" width="726" height="14">
+				<element kind="textField" uuid="b5604724-7e47-4b4c-8e7f-42f1bd0ba0ca" positionType="Float" x="-95" y="0" width="95" height="14" fontName="Arial" fontSize="12.0" textAdjust="StretchHeight" blankWhenNull="true" bold="false" style="Detail">
+					<expression><![CDATA[$F{ID_IDENTIFICATION}]]></expression>
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5199e0a3-badb-4760-80cb-5feef7ed2a57"/>
+				</element>
+				<element kind="textField" uuid="7d7f47a9-dae3-42b2-bf0b-cc9cd0c9935d" positionType="Float" x="0" y="0" width="95" height="14" fontName="Arial" fontSize="12.0" textAdjust="StretchHeight" blankWhenNull="true" bold="false" style="Detail">
+					<expression><![CDATA[$F{NAME}]]></expression>
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c00fa746-68b6-4035-9f18-be098c464be5"/>
+				</element>
+				<element kind="textField" uuid="eee129fb-f2fa-4179-9024-6236d4ade9d5" positionType="Float" x="95" y="0" width="95" height="14" fontName="Arial" fontSize="12.0" textAdjust="StretchHeight" blankWhenNull="true" bold="false" style="Detail">
+					<expression><![CDATA[$F{PHONE}]]></expression>
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="46e3d1ff-605b-4b3e-94de-91e3ac8d26a8"/>
+				</element>
+				<element kind="textField" uuid="fe454e7c-1ee1-4139-8fa8-c8c2561f8306" positionType="Float" x="190" y="0" width="140" height="14" fontName="Arial" fontSize="12.0" textAdjust="StretchHeight" blankWhenNull="true" bold="false" style="Detail">
+					<expression><![CDATA[$F{EMAIL}]]></expression>
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a3abdeb4-9919-4d3a-8b9a-640b9ae4f9ff"/>
+				</element>
+				<element kind="textField" uuid="634e1175-1c5a-438d-b4ef-72b0dc4a8c2d" positionType="Float" x="400" y="0" width="95" height="14" fontName="Arial" fontSize="12.0" textAdjust="StretchHeight" blankWhenNull="true" bold="false" style="Detail">
+					<expression><![CDATA[$F{ADDRESS}]]></expression>
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="13bbc4ec-7601-4c03-9fcb-8c3edea8b7a3"/>
+				</element>
+				<element kind="textField" uuid="ee19542e-b70e-450c-a825-bd5a853cf32e" positionType="Float" x="555" y="1" width="170" height="14" fontName="Arial" fontSize="12.0" textAdjust="StretchHeight" blankWhenNull="true" bold="false" style="Detail">
+					<expression><![CDATA[$F{ECONOMIC_ACTIVITY}]]></expression>
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="928a936a-f325-45ab-91ab-5603f454a265"/>
+				</element>
+			</element>
+		</band>
+	</detail>
+	<columnFooter height="7" splitType="Stretch">
+		<element kind="line" uuid="c23ffbf7-1928-41f8-ade3-5930d9a4871d" positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1">
+			<pen lineWidth="0.5" lineColor="#999999"/>
+		</element>
+	</columnFooter>
+	<pageFooter height="16" splitType="Stretch">
+		<element kind="frame" uuid="6f4fe8ef-88ca-4d5d-b46a-054826bb7893" mode="Opaque" x="2" y="0" width="800" height="16" forecolor="#D0B48E" backcolor="#006699">
+			<element kind="textField" uuid="970781d6-87a0-4d3d-a07b-5ae173a1317a" x="753" y="0" width="40" height="16" forecolor="#FFFFFF" fontName="Arial" fontSize="12.0" evaluationTime="Report" bold="false" vTextAlign="Middle" style="Column header">
+				<expression><![CDATA[" " + $V{PAGE_NUMBER}]]></expression>
+			</element>
+			<element kind="textField" uuid="42664b34-c87b-42f8-911b-bd9c2ab9111e" x="673" y="0" width="80" height="16" forecolor="#FFFFFF" fontName="Arial" fontSize="12.0" bold="false" hTextAlign="Right" vTextAlign="Middle" style="Column header">
+				<expression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></expression>
+			</element>
+			<element kind="textField" uuid="06b3d6e8-b4a5-4251-b1fb-f640689933e8" x="2" y="0" width="197" height="16" forecolor="#FFFFFF" fontName="Arial" fontSize="12.0" pattern="EEEEE dd MMMMM yyyy" bold="false" vTextAlign="Middle" style="Column header">
+				<expression><![CDATA[new java.util.Date()]]></expression>
+			</element>
+		</element>
+	</pageFooter>
+	<summary splitType="Stretch"/>
+</jasperReport>

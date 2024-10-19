@@ -16,6 +16,7 @@ public class Company implements Serializable {
     private String email;
     private String idIdentification;
     private String economicActivity;
+
     private Integer createdBy;
     private Integer updatedBy;
     private Date createdAt;
@@ -166,4 +167,6 @@ public class Company implements Serializable {
     public void setActive(boolean active) {
         this.active = active;
     }
+
+
 }

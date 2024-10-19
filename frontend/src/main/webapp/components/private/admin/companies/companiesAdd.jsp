@@ -77,8 +77,7 @@
     }%>
 </h1>
 
-<form id="addCompany" action="${pageContext.request.contextPath}/companies" method="p
-ost">
+<form id="addCompany" action="${pageContext.request.contextPath}/companies" method="post">
     <% if (isDelete) { %>
     <input type="hidden" name="action" value="delete">
     <% } else { %>
@@ -86,7 +85,7 @@ ost">
     <% } %>
 
     <input type="hidden" name="companyId" value="${company.getID()}"
-           <%if(isDelete){%>disabled<%}%>>
+          >
     <div class="form-group">
         <label for="nombre">Nombre:</label>
         <input type="text" id="nombre" name="nombre" required value="${company.getNAME()}"
